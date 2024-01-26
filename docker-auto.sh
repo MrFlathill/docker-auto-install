@@ -51,7 +51,7 @@ echo \
 # Install Docker via apt
 echo -e "\n${GREEN}Installing Docker from repository trough apt${NC}"
 sudo apt update
-sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
 # Change permission for local user by adding to "docker" group
 user=$(whoami)
