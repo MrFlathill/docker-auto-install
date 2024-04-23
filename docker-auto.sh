@@ -28,7 +28,7 @@ fi
 
 # Update and upgrade
 echo -e "\n${GREEN}Update and upgrade${NC}"
-sudo apt update && sudo apt full-upgrade -y
+sudo apt update && sudo apt dist-upgrade -y
 
 # Autoremove and clean
 echo -e "\n${GREEN}Autoremove and clean${NC}"
