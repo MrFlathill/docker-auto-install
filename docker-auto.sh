@@ -36,17 +36,18 @@ sudo apt autoremove -y && sudo apt clean
 
 # Remove previouse Docker installations
 echo -e "\n${GREEN}Fully remove potentiall previouse Docker installations${NC}"
-sudo apt remove --purge docker docker-engine docker.io containerd runc -y
+sudo apt remove --purge docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc -y
 
 # Setup Repository
 echo -e "\n${GREEN}Setting up Docker repository${NC}"
 sudo apt update
-sudo apt install ca-certificates curl gnupg lsb-release -y
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo apt install ca-certificates curl -y
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # Install Docker via apt
 echo -e "\n${GREEN}Installing Docker from repository trough apt${NC}"
